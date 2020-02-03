@@ -107,9 +107,108 @@ function isInteger(x) {
 //10. What order do these print? 
 
 (function() {
-  console.log(1); 
-  setTimeout(function(){console.log(2)}, 1000); 
-  setTimeout(function(){console.log(3)}, 0); 
-  console.log(4);
+  // console.log(1); 
+  // setTimeout(function(){console.log(2)}, 1000); 
+  // setTimeout(function(){console.log(3)}, 0); 
+  // console.log(4);
 }()); //1 4 3 2  4 comes before 3 because setTimeout puts its callback function into an event queque 
+
+//11. Write a simple function (less than 160 characters) that returns a boolean indicating whether or not a string is a palindrome.
+
+function isPalindron(str) {
+  let low = str.toLowerCase();
+  let i = 0 
+  let j = str.length - 1 
+  while (i < j) {
+    if(low[i]===low[j]) {i++; j--;} else {return false}
+  }
+  return true;
+}
+
+function isPalindrome2(str) {
+  str = str.replace(/\W/g, '').toLowerCase(); //removes white space and punctuation.
+  return (str == str.split('').reverse().join(''));
+}
+
+//12. Sum method that works for either of the following 
+
+console.log(sum(2,3));   // Outputs 5
+console.log(sum(2)(3));  // Outputs 5
+
+function sum(x,y) {
+  if (y) {
+    return x+y;
+  } else
+  return function(z) {
+   return x+z;
+  }
+}
+
+// 13. what gets logged when you click Button 4?
+
+// for (var i = 0; i < 5; i++) {
+//   var btn = document.createElement('button');
+//   btn.appendChild(document.createTextNode('Button ' + i));
+//   btn.addEventListener('click', function(){ console.log(i); });
+//   document.body.appendChild(btn);
+// }
+//5 gets logged no matter what button is clicked. because the for loop has completed. If you use let instead of var this will be fixed
+//or you can change the on click function to function(i){ return (function(){console.log(i)}(i)); }
+
+// 14. What does the following code accomplish
+
+let d = {};
+[ 'zebra', 'horse' ].forEach(function(k) {
+	d[k] = undefined;
+}); 
+
+//it sets the properties zebra and horse onto the object d and explicitly sets them as undefined. 
+//They would also be undefined if they don't exist but now Object.keys will contain them.
+
+// 15. What is the output? 
+
+var arr1 = "john".split('');
+var arr2 = arr1.reverse();
+var arr3 = "jones".split('');
+arr2.push(arr3);
+console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1)); // 5 and [j,o,n,e,s]
+console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1)); // 5 and [j,o,n,e,s]
+
+//This happens because the reverse method actually reverses the array in place and then returns a reference to the reversed array instead of a new array.
+
+//16. Output? 
+
+// console.log(1 +  "2" + "2"); //"122"
+// console.log(1 +  +"2" + "2"); // "32" order of operations converts +"2" to a possitive 2 first so 1+2= 3 + "2" = "32"
+// console.log(1 +  -"1" + "2"); // "02" see above description
+// console.log(+"1" +  "1" + "2"); //"112" first "1" is converted to a number but then back to a string on the second operation
+// console.log( "A" - "B" + "2"); // "NaN2" - can't be don't to strings so you get NaN
+// console.log( "A" - "B" + 2); // NaN same as above but since the 2 is a number NaN + a numer = NaN.
+
+//17. How do you avoid stack overflow while keeping recursive functionality below on a large list. 
+
+// var list = readHugeList();
+
+// var nextListItem = function() {
+//     var item = list.pop();
+
+//     if (item) {
+//         // process the list item...
+//         nextListItem(); // change this to setTimeout(nextListItem(), 0); This takes it off the stack itself and is in the event queue
+//     }
+// };
+
+//18. What is a closure? 
+
+//A closure is a function defined inside another function, so that it has access to the variables in the function and globals and any defined within itself.
+//You can use this to return a function from another function to wrap variables for a counter or something and not lose them once the function is invoked.
+
+//19. 
+
+console.log("0 || 1 = "+(0 || 1)); // 1 first true value with or statement
+console.log("1 || 2 = "+(1 || 2)); // 1 first true value with or statement
+console.log("0 && 1 = "+(0 && 1)); // 0 first false value with and statement
+console.log("1 && 2 = "+(1 && 2)); // 2 last true value with and statement where all are true.
+
+
 
