@@ -109,7 +109,7 @@ function isInteger(x) {
 (function() {
   // console.log(1); 
   // setTimeout(function(){console.log(2)}, 1000); 
-  // setTimeout(function(){console.log(3)}, 0); 
+  // setTimeout(function(){console.log(3)}, 0); // This part can also be written as setImediate(function(){console.log(3)}) and you will get the same output.
   // console.log(4);
 }()); //1 4 3 2  4 comes before 3 because setTimeout puts its callback function into an event queque 
 
@@ -132,8 +132,8 @@ function isPalindrome2(str) {
 
 //12. Sum method that works for either of the following 
 
-console.log(sum(2,3));   // Outputs 5
-console.log(sum(2)(3));  // Outputs 5
+// console.log(sum(2,3));   // Outputs 5
+// console.log(sum(2)(3));  // Outputs 5
 
 function sum(x,y) {
   if (y) {
@@ -171,8 +171,8 @@ var arr1 = "john".split('');
 var arr2 = arr1.reverse();
 var arr3 = "jones".split('');
 arr2.push(arr3);
-console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1)); // 5 and [j,o,n,e,s]
-console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1)); // 5 and [j,o,n,e,s]
+// console.log("array 1: length=" + arr1.length + " last=" + arr1.slice(-1)); // 5 and [j,o,n,e,s]
+// console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1)); // 5 and [j,o,n,e,s]
 
 //This happens because the reverse method actually reverses the array in place and then returns a reference to the reversed array instead of a new array.
 
@@ -205,10 +205,100 @@ console.log("array 2: length=" + arr2.length + " last=" + arr2.slice(-1)); // 5 
 
 //19. 
 
-console.log("0 || 1 = "+(0 || 1)); // 1 first true value with or statement
-console.log("1 || 2 = "+(1 || 2)); // 1 first true value with or statement
-console.log("0 && 1 = "+(0 && 1)); // 0 first false value with and statement
-console.log("1 && 2 = "+(1 && 2)); // 2 last true value with and statement where all are true.
+// console.log("0 || 1 = "+(0 || 1)); // 1 first true value with or statement
+// console.log("1 || 2 = "+(1 || 2)); // 1 first true value with or statement
+// console.log("0 && 1 = "+(0 && 1)); // 0 first false value with and statement
+// console.log("1 && 2 = "+(1 && 2)); // 2 last true value with and statement where all are true.
 
+//20. Output 
 
+// console.log(false == '0') // true
+// console.log(false === '0') //false 
 
+ // 21. Output?
+
+ var a={},
+    b={key:'b'},
+    c={key:'c'};
+
+a[b]=123;
+a[c]=456;
+
+console.log(a[b]); //456 JavaScript will stringify b and c when defining them as a key on a so both will be [Object object].
+//so the code could alse be written like below, and thus both refer to the same thing. 
+
+a['[Object object]']=123;
+a['[Object object]']=456;
+
+//21. output?
+
+// console.log((function f(n){return ((n > 1) ? n * f(n-1) : n)})(10)); // 10 factorial 10!
+
+//22. Output?
+
+(function(x) {
+  return (function(y) {
+      console.log(x);
+  })(2)
+})(1); // Output is 1 because the inner function has access to the scope in the outer function where x is defined as 1
+
+//23. Output?
+
+var hero = {
+  _name: 'John Doe',
+  getSecretIdentity: function (){
+      return this._name;
+  }
+};
+
+var stoleSecretIdentity = hero.getSecretIdentity;
+
+// console.log(stoleSecretIdentity()); // undefined because when calling the method on stoleSecretIdentity this 
+ //is the global object which doesn't have a _name property.
+// console.log(hero.getSecretIdentity()); // 'John Doe' because this refers to the hero object where _name is defined.
+
+//24. What is callback hell? 
+
+  //It is where you have a bunch of nested callbacks that run one after the other 
+  //because they rely on the previous function for a value. Async / Await is a great modern way to avoid callback hell.
+
+  //25. Why does the following code take much longer to run in a Chrome browser than in Node.js
+  //  {
+  //   console.time("loop");
+  //   for (var i = 0; i < 1000000; i += 1){
+  //       // Do nothing
+  //   }
+  //   console.timeEnd("loop");
+//}
+
+// In the browser when i is defined as a global variable it is attached to the window global object which is a large object. 
+// So every time it needs to update it has to manipulate a large object which takes longer than changing the small
+// global scope in the Node.js environment. 
+
+//26. What do the following lines output, and why?
+
+// console.log(1 < 6 < 3); // true (1 < 6 < 3) ==> (true < 3 ) ==> (1 < 3) ==> true
+// console.log(3 > 2 > 1); // false (3 > 2 > 1) ==> (true > 1) ==> (1 > 1) ==> false
+
+//27.  How do you add an element to the beginning and end of array?
+
+//End array.push(endElement);
+//beginning array.unshift(startElement);
+//both [startElement, ...array, endElement] spread operator can be used for for beginning or end too.
+
+//28. Imagine you have this code:
+
+// let  a = [1, 2, 3];
+// a) Will this result in a crash?
+// a[10] = 99;
+//no it won't crash, but slots 3-9 will be empty slots.
+
+// b) What will this output?
+// console.log(a[6]);
+//this will log undefined but the slot will be empty not specifically filled with undefined.
+
+//29. What is the value of typeof undefined == typeof NULL?
+
+//it evaluates to true because NULL being all uppercase means it is treated like any 
+//other variable, and since it isn't defined it will have the type undefined
+//where as null has the type object.
