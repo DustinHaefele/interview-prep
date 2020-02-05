@@ -238,7 +238,7 @@ a['[Object object]']=456;
 
 (function(x) {
   return (function(y) {
-      console.log(x);
+      //console.log(x);
   })(2)
 })(1); // Output is 1 because the inner function has access to the scope in the outer function where x is defined as 1
 
@@ -302,3 +302,122 @@ var stoleSecretIdentity = hero.getSecretIdentity;
 //it evaluates to true because NULL being all uppercase means it is treated like any 
 //other variable, and since it isn't defined it will have the type undefined
 //where as null has the type object.
+
+//30. What would following code return?
+
+//console.log(typeof typeof 1);  ==> (typeof 'number') => 'string' 
+
+//31. Output?? 
+
+var b = 1;
+function outer(){
+   	var b = 4
+    function inner(){
+        b++;
+        var b = 3;
+        //console.log(b)
+    }
+    inner();
+}
+outer();
+
+// 3 because it will look to it's local scope first and find b defined as 3 and print it out.
+
+//32. Output??
+
+var y = 1;
+  if (function f(){}) {
+    y += typeof f;
+  }
+  //console.log(y);
+
+  //Outputs '1undefined' because function is only defined in the if conditional parens and not in the scope of the conditional itself.
+
+  //33. What is the drawback of creating true private methods in JavaScript?
+
+  // One drawback is that they are memory inefficient in the code block below all 3 
+  //employees will have their own copy of the increaseSalary method.
+  
+    var Employee = function (name, company, salary) {
+    this.name = name || "";       //Public attribute default value is null
+    this.company = company || ""; //Public attribute default value is null
+    this.salary = salary || 5000; //Public attribute default value is null
+
+    // Private method
+    var increaseSalary = function () {
+        this.salary = this.salary + 1000;
+    };
+
+    // Public method
+    this.dispalyIncreasedSalary = function() {
+        increaseSalary();
+        //console.log(this.salary);
+    };
+};
+
+// Create Employee class object
+var emp1 = new Employee("John","Pluto",3000);
+// Create Employee class object
+var emp2 = new Employee("Merry","Pluto",2000);
+// Create Employee class object
+var emp3 = new Employee("Ren","Pluto",2500);
+
+//34. how to empty an array?
+
+  let myArr = ['a','e','i','o','u'];
+  let myNewArray = myArr;
+
+  myArr = []; //this is one way but is not reccommended because if another array points 
+              //to this one before you empty it the other array won't empty. see below;
+
+  // console.log(myArr); // []
+  // console.log(myNewArray) // [a,e,i,o,u]
+
+  // better ways
+
+  // myArr.length = 0;
+  // myArr.slice(0,myArr.length);
+
+  //35. What will be the output of the following code?
+var output = (function(x){
+  delete x;
+  return x;
+})(0);
+
+//console.log(output);
+
+// 0 delete removes things from objects, it doesn't delete local variables. 
+
+
+var x = { foo : 1};
+var output = (function(){
+    delete x.foo;
+    return x.foo;
+  })();
+  
+ //console.log(output);
+
+  //this would print undefined because it is removing foo from the x object.
+
+
+//36. What is undefined x 1 in JavaScript?
+
+//undefined x 1 is how the chrome browser shows the uninitalized array index.
+//but you can still check it with arr[3] === undefined in the code.
+
+//37. What will be the output of the code below?
+var trees = ["xyz","xxxx","test","ryan","apple"];
+delete trees[3];
+  
+  //console.log(trees.length); // 5 delete operator won't affect the length just make that index undefined.
+
+//38. What will be the output of the code below?
+
+var bar = true;
+// console.log(bar + 0);   //1 boolean + number ==> addition
+// console.log(bar + "xyz");  // 'truexyz' boolean + string ==> concatation
+// console.log(bar + true);  // 2 boolean + boolean ==> addition
+// console.log(bar + false); //1 boolean + boolean ==> addition
+
+
+
