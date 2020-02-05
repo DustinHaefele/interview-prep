@@ -413,11 +413,24 @@ delete trees[3];
 
 //38. What will be the output of the code below?
 
-var bar = true;
+//var bar = true;
 // console.log(bar + 0);   //1 boolean + number ==> addition
 // console.log(bar + "xyz");  // 'truexyz' boolean + string ==> concatation
 // console.log(bar + true);  // 2 boolean + boolean ==> addition
 // console.log(bar + false); //1 boolean + boolean ==> addition
+
+//39. What is the instanceof operator in JavaScript? What would be the output of the code below?
+
+// var dog = new Animal();
+// dog instanceof Animal // Output : true
+
+//40. Get the length of an object.
+
+let obj2 = {1:1, 2:2, 3:3};
+
+let length = Object.keys(obj2).length;
+
+console.log('length',length);
 
 
 
