@@ -432,5 +432,14 @@ let length = Object.keys(obj2).length;
 
 console.log('length',length);
 
+//41. Output
+
+var text = 'outside';
+function logIt(){
+    console.log(text);
+    var text = 'inside';
+};
+logIt(); //I think the console will show undefined;
+
 
 
