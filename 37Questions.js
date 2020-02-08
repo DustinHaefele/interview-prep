@@ -441,5 +441,14 @@ function logIt(){
 };
 logIt(); //I think the console will show undefined;
 
+//42. What is namespacing in JavaScript.
 
+  //Namespacing is a global object with a unique name that holds it's own properties methods etc.
+  //You use it to make sure that you don't have variable manipulation by another module, especially external
+  //modules that you or your team didn't write
+
+//43. New HTML5 input types? 
+  //date month email datetime-local etc.
+
+//44. 
 
